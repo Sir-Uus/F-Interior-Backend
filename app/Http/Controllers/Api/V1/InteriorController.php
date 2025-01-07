@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Interior;
-use App\Http\Requests\StoreInteriorRequest;
 use App\Http\Requests\UpdateInteriorRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\InteriorCollection;
 use App\Http\Resources\V1\InteriorResource;
 use App\Filters\V1\InteriorQuery;
+use App\Http\Requests\V1\StoreInteriorRequest;
 use Illuminate\Http\Request;
 
 class InteriorController extends Controller
@@ -49,7 +49,7 @@ class InteriorController extends Controller
      */
     public function store(StoreInteriorRequest $request)
     {
-        //
+        return new InteriorResource(Interior::create($request->all()));
     }
 
     /**

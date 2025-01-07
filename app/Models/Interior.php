@@ -13,6 +13,15 @@ class Interior extends Model
     protected $keyType = 'string';
     public $incrementing = false; 
 
+    protected $fillable = [
+        'name',
+        'category_id',
+        'type',
+        'description',
+        'price',
+        'image'
+    ];
+
     protected static function boot()
     {
         parent::boot();
