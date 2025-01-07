@@ -25,6 +25,6 @@ class Category extends Model
     }
 
     public function interior() {
-        return $this->belongsTo(interior::class);
+        return $this->hasMany(interior::class);
     }
 }

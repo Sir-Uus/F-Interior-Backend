@@ -22,11 +22,17 @@ class CategoryController extends Controller
     {
         $filter = new CategoryQuery();
         $queryItems = $filter->transform($request);
-        if (count($queryItems) == 0) {
-            return new CategoryCollection(Category::paginate());
-        } else {    
-            return new CategoryCollection(Category::where($queryItems)->paginate());
+
+        $includeInterior = $request->query('include-interior');
+
+        $category = Category::where($queryItems);
+
+        if ($includeInterior) {
+            $category = $category->with('interior');
         }
+
+        return new CategoryCollection($category->paginate()->appends($request->query()));
+
     }
 
     /**

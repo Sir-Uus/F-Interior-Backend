@@ -22,10 +22,12 @@ class InteriorController extends Controller
     {
         $filter = new InteriorQuery();
         $queryItems = $filter->transform($request);
+        
         if (count($queryItems) == 0) {
             return new InteriorCollection(Interior::paginate());
-        } else {    
-            return new InteriorCollection(Interior::where($queryItems)->paginate());
+        } else {
+            $interior = Interior::where($queryItems)->paginate();
+            return new InteriorCollection($interior->appends($request->query()));
         }
     }
 
