@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateInteriorRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\InteriorCollection;
 use App\Http\Resources\V1\InteriorResource;
+use App\Filters\V1\InteriorQuery;
+use Illuminate\Http\Request;
 
 class InteriorController extends Controller
 {
@@ -16,9 +18,15 @@ class InteriorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new InteriorCollection(Interior::paginate());
+        $filter = new InteriorQuery();
+        $queryItems = $filter->transform($request);
+        if (count($queryItems) == 0) {
+            return new InteriorCollection(Interior::paginate());
+        } else {    
+            return new InteriorCollection(Interior::where($queryItems)->paginate());
+        }
     }
 
     /**

@@ -4,7 +4,7 @@ namespace App\Filters\V1;
 
 use App\Filters\ApiFilters;
 
-class CategoryQuery extends  ApiFilters{
+class InteriorQuery extends  ApiFilters{
   protected $allowedParms = [
     'categoryId' => ['eq'],
     'name' => ['eq'],
