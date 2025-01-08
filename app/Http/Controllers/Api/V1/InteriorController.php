@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Interior;
-use App\Http\Requests\UpdateInteriorRequest;
+use App\Http\Requests\V1\UpdateInteriorRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\InteriorCollection;
 use App\Http\Resources\V1\InteriorResource;
@@ -83,7 +83,7 @@ class InteriorController extends Controller
      */
     public function update(UpdateInteriorRequest $request, Interior $interior)
     {
-        //
+        $interior->update($request->all());
     }
 
     /**
