@@ -13,7 +13,11 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        $user = $this->user();
+
+        return $user != null && $user->tokenCan('update');
+
+        return true;
     }
 
     /**
@@ -23,8 +27,12 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+
+        if ($method == "PUT") {
+            return [
+                'name' => ['sometimes','required'],
+            ];
+        }
     }
 }
